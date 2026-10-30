@@ -1,0 +1,491 @@
+
+:root {
+    --black: #090909;
+    --panel: #141414;
+    --gold: #d4af37;
+    --white: #f5f5f5;
+    --gray: #a5a5a5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* NAVEGACIÓN */
+
+.navbar {
+    min-height: 82px;
+    padding: 18px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    background: #0b0b0b;
+    border-bottom: 1px solid #242424;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--gold);
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    color: #c4c4c4;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--gold);
+}
+
+/* BOTONES */
+
+.btn {
+    display: inline-block;
+    padding: 13px 23px;
+    background: var(--gold);
+    color: #111;
+    font-weight: 800;
+    font-size: 13px;
+    border: 1px solid var(--gold);
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: transparent;
+    color: var(--gold);
+}
+
+.btn-small {
+    padding: 10px 16px;
+}
+
+/* PORTADA */
+
+.hero {
+    min-height: 590px;
+    padding: 100px 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.96) 0%,
+            rgba(0,0,0,0.78) 48%,
+            rgba(0,0,0,0.22) 100%
+        ),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=85")
+        center 58% / cover no-repeat;
+}
+
+.hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1.08;
+    letter-spacing: -2px;
+    font-weight: 900;
+    margin-bottom: 22px;
+}
+
+h1 span,
+h2 span {
+    color: var(--gold);
+}
+
+.hero-description {
+    max-width: 440px;
+    color: #c6c6c6;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.hero-label {
+    position: absolute;
+    right: 7%;
+    bottom: 30px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #e5e5e5;
+}
+
+.gold-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-right: 8px;
+}
+
+/* SECCIONES */
+
+.section {
+    padding: 85px 7%;
+}
+
+.vehicles {
+    background: #0d0d0d;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 25px;
+    margin-bottom: 38px;
+}
+
+.section-heading h2,
+.about h2,
+.contact h2 {
+    font-size: clamp(30px, 4vw, 44px);
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.section-heading > p {
+    color: var(--gray);
+    font-size: 14px;
+    max-width: 270px;
+}
+
+/* TARJETAS DE VEHÍCULOS */
+
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+.vehicle-card {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    background: var(--panel);
+    border: 1px solid #262626;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.vehicle-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+}
+
+.car-image {
+    width: 100%;
+    height: 230px;
+    position: relative;
+    background-color: #202020;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.car-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--gold);
+    color: #111;
+    padding: 6px 10px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.vehicle-info {
+    padding: 23px;
+}
+
+.vehicle-type {
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.vehicle-info h3 {
+    font-size: 23px;
+    margin: 7px 0 20px;
+}
+
+.vehicle-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid #303030;
+    padding-top: 17px;
+}
+
+.vehicle-bottom p {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.vehicle-bottom strong {
+    color: var(--white);
+    font-size: 15px;
+}
+
+.arrow-btn {
+    width: 37px;
+    height: 37px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #555;
+    color: var(--gold);
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.arrow-btn:hover {
+    background: var(--gold);
+    color: #111;
+}
+
+/* NOSOTROS */
+
+.about {
+    text-align: center;
+    background: #111;
+}
+
+.about h2 {
+    margin-bottom: 20px;
+}
+
+.about > p:last-child {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--gray);
+}
+
+/* FORMULARIO DE RESERVAS */
+
+.rent-section {
+    background: #101010;
+    color: #ffffff;
+    padding: 80px 8%;
+    clear: both;
+    position: relative;
+    margin-top: 50px;
+}
+
+.rent-section .section-heading {
+    margin-bottom: 35px;
+}
+
+.rent-section .section-heading h2 span {
+    color: var(--gold);
+}
+
+.rental-form {
+    max-width: 650px;
+    display: grid;
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group label {
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.rental-form input,
+.rental-form select {
+    width: 100%;
+    padding: 15px;
+    background: #1c1c1c;
+    color: #ffffff;
+    border: 1px solid #454545;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.rental-form input:focus,
+.rental-form select:focus {
+    outline: 1px solid var(--gold);
+    border-color: var(--gold);
+}
+
+.rental-form button {
+    cursor: pointer;
+    justify-self: start;
+}
+
+.rental-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#rental-message {
+    color: var(--gold);
+    font-size: 14px;
+}
+
+/* CONTACTO */
+
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    background: #090909;
+    border-top: 1px solid #242424;
+}
+
+.contact h2 {
+    margin-bottom: 0;
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+    padding: 27px 7%;
+    border-top: 1px solid #252525;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+footer p {
+    color: var(--gray);
+    font-size: 12px;
+    text-align: right;
+}
+
+/* TABLETAS */
+
+@media (max-width: 900px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+    nav {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .vehicle-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+    .navbar {
+        padding: 18px 5%;
+    }
+
+    nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .navbar > .btn {
+        display: none;
+    }
+
+    .hero {
+        min-height: 540px;
+        padding: 75px 6%;
+        background-position: 58% center;
+    }
+
+    .hero h1 {
+        letter-spacing: -1px;
+    }
+
+    .hero-label {
+        right: auto;
+        left: 6%;
+        font-size: 8px;
+    }
+
+    .section {
+        padding: 60px 6%;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .vehicle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .car-image {
+        height: 230px;
+    }
+
+    .contact,
+    footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    footer p {
+        text-align: left;
+    }
+}

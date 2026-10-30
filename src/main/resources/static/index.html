@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Renting | Alquiler de vehículos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#inicio" class="logo">CAR<span>RENTING</span></a>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#vehiculos">Vehículos</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <a href="#vehiculos" class="btn btn-small">Ver vehículos</a>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <p class="eyebrow">TU PRÓXIMO VIAJE COMIENZA AQUÍ</p>
+                <h1>CONDUCE TU<br>PRÓXIMA <span>HISTORIA.</span></h1>
+                <p class="hero-description">
+                    Encuentra el vehículo ideal para cada aventura.
+                    Calidad, comodidad y libertad en un solo lugar.
+                </p>
+                <a href="#vehiculos" class="btn">Explorar vehículos ↗</a>
+            </div>
+
+            <div class="hero-label">
+                <span class="gold-dot"></span>
+                LIBERTAD EN CADA KILÓMETRO
+            </div>
+        </section>
+
+        <section class="vehicles section" id="vehiculos">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">NUESTRA FLOTA</p>
+                    <h2>Encuentra tu <span>máquina.</span></h2>
+                </div>
+                <p>El vehículo perfecto para tu próximo destino.</p>
+            </div>
+
+            <div class="vehicle-grid" id="vehicle-grid">
+                <p>Cargando vehículos...</p>
+            </div>
+        </section>
+
+        <section class="about section" id="nosotros">
+            <p class="eyebrow">MÁS QUE UN ALQUILER</p>
+            <h2>Tu camino. Tus reglas.<br><span>Nuestra flota.</span></h2>
+            <p>
+                En Car Renting hacemos que encontrar tu próximo vehículo
+                sea sencillo. Elige tu destino y prepárate para conducir.
+            </p>
+        </section>
+
+        <section class="rent-section section" id="alquiler">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">RESERVA TU VEHÍCULO</p>
+                    <h2>Empieza tu <span>viaje.</span></h2>
+                </div>
+                <p>Completa tus datos para solicitar un alquiler.</p>
+            </div>
+
+            <form id="rental-form" class="rental-form">
+
+                <div class="form-group">
+                    <label for="rental-car">Vehículo</label>
+                    <select id="rental-car" name="car" required>
+                        <option value="">Selecciona un vehículo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-name">Nombre completo</label>
+                    <input
+                        id="customer-name"
+                        name="name"
+                        type="text"
+                        required
+                        placeholder="Tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-email">Correo electrónico</label>
+                    <input
+                        id="customer-email"
+                        name="email"
+                        type="email"
+                        required
+                        placeholder="correo@ejemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="rental-days">Días de alquiler</label>
+                    <input
+                        id="rental-days"
+                        name="days"
+                        type="number"
+                        min="1"
+                        max="365"
+                        required
+                        value="1">
+                </div>
+
+                <button type="submit" class="btn">
+                    Solicitar alquiler ↗
+                </button>
+
+                <p id="rental-message" role="status"></p>
+
+            </form>
+        </section>
+
+        <section class="contact section" id="contacto">
+            <div>
+                <p class="eyebrow">¿LISTO PARA ARRANCAR?</p>
+                <h2>Tu próximo viaje<br>empieza <span>aquí.</span></h2>
+            </div>
+            <a href="mailto:contacto@carrenting.com" class="btn">
+                Contáctanos ↗
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#inicio" class="logo">CAR<span>RENTING</span></a>
+        <p>© 2026 Car Renting. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // IMÁGENES DE LOS VEHÍCULOS
+    const imagenesVehiculos = {
+    1: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85",
+    2: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=85",
+    3: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=900&q=85",
+    4: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=85",
+    5: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=900&q=85",
+    6: "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=85",
+    7: "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=900&q=85"
+};
+
+        // CARGAR VEHÍCULOS DESDE EL BACKEND
+        async function cargarVehiculos() {
+            const contenedor = document.getElementById("vehicle-grid");
+            const selector = document.getElementById("rental-car");
+
+            try {
+                const respuesta = await fetch("/api/vehiculos");
+
+                if (!respuesta.ok) {
+                    throw new Error("Error al consultar los vehículos");
+                }
+
+                const vehiculos = await respuesta.json();
+
+                if (vehiculos.length === 0) {
+                    contenedor.innerHTML =
+                        "<p>No hay vehículos registrados todavía.</p>";
+                    return;
+                }
+
+                contenedor.innerHTML = vehiculos.map(vehiculo => {
+                    const nombreCompleto =
+                        `${vehiculo.marca} ${vehiculo.nombre}`;
+
+                    const precio = Number(
+                        vehiculo.precioPorDia
+                    ).toLocaleString("es-CO", {
+                        style: "currency",
+                        currency: "COP",
+                        maximumFractionDigits: 0
+                    });
+
+                    const disponible = vehiculo.disponible;
+
+                    const imagen = imagenesVehiculos[vehiculo.id]
+                        || "/images/default.jpg";
+
+                    return `
+                        <article class="vehicle-card">
+
+                            <div class="car-image"
+                                 style="
+                                    background-image: url('${imagen}');
+                                    background-size: cover;
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                 ">
+                                <span class="car-tag">
+                                    ${vehiculo.tipo}
+                                </span>
+                            </div>
+
+                            <div class="vehicle-info">
+
+                                <p class="vehicle-type">
+                                    ${disponible
+                                        ? "VEHÍCULO DISPONIBLE"
+                                        : "NO DISPONIBLE"}
+                                </p>
+
+                                <h3>${nombreCompleto}</h3>
+
+                                <p>Modelo: ${vehiculo.modelo}</p>
+
+                                <div class="vehicle-bottom">
+                                    <p>
+                                        Desde <strong>${precio}</strong> / día
+                                    </p>
+
+                                    <a href="#alquiler"
+                                       class="arrow-btn"
+                                       aria-label="Consultar ${nombreCompleto}">
+                                        ↗
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }).join("");
+
+                selector.innerHTML =
+                    '<option value="">Selecciona un vehículo</option>';
+
+                vehiculos
+                    .filter(vehiculo => vehiculo.disponible)
+                    .forEach(vehiculo => {
+                        const opcion = document.createElement("option");
+
+                        opcion.value = vehiculo.id;
+
+                        opcion.textContent =
+                            `${vehiculo.marca} ${vehiculo.nombre} - ${
+                                Number(vehiculo.precioPorDia)
+                                    .toLocaleString("es-CO")
+                            } COP/día`;
+
+                        selector.appendChild(opcion);
+                    });
+
+            } catch (error) {
+                console.error(error);
+
+                contenedor.innerHTML =
+                    "<p>No fue posible cargar los vehículos. " +
+                    "Comprueba que el servidor esté funcionando.</p>";
+            }
+        }
+
+        // INICIAR CARGA DE VEHÍCULOS
+        document.addEventListener(
+            "DOMContentLoaded",
+            cargarVehiculos
+        );
+
+        // REGISTRAR RESERVAS EN EL BACKEND
+        document.getElementById("rental-form").addEventListener(
+            "submit",
+            async function(event) {
+                event.preventDefault();
+
+                const mensaje =
+                    document.getElementById("rental-message");
+
+                const boton =
+                    this.querySelector('button[type="submit"]');
+
+                const datosReserva = {
+                    nombreCliente:
+                        document.getElementById("customer-name")
+                            .value.trim(),
+
+                    correoCliente:
+                        document.getElementById("customer-email")
+                            .value.trim(),
+
+                    vehiculoId:
+                        Number(
+                            document.getElementById("rental-car").value
+                        ),
+
+                    dias:
+                        Number(
+                            document.getElementById("rental-days").value
+                        )
+                };
+
+                if (!datosReserva.vehiculoId) {
+                    mensaje.textContent =
+                        "Por favor, selecciona un vehículo.";
+                    return;
+                }
+
+                if (
+                    !Number.isInteger(datosReserva.dias) ||
+                    datosReserva.dias < 1 ||
+                    datosReserva.dias > 365
+                ) {
+                    mensaje.textContent =
+                        "Los días deben estar entre 1 y 365.";
+                    return;
+                }
+
+                boton.disabled = true;
+                boton.textContent = "Procesando reserva...";
+
+                try {
+                    const respuesta = await fetch("/api/reservas", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(datosReserva)
+                    });
+
+                    const resultado = await respuesta.json();
+
+                    if (!respuesta.ok) {
+                        throw new Error(
+                            resultado.mensaje ||
+                            "No se pudo registrar la reserva."
+                        );
+                    }
+
+                    mensaje.textContent =
+                        "¡Reserva registrada correctamente! " +
+                        "Número: " + resultado.id +
+                        ". Total: " +
+                        Number(resultado.precioTotal).toLocaleString(
+                            "es-CO",
+                            {
+                                style: "currency",
+                                currency: "COP",
+                                maximumFractionDigits: 0
+                            }
+                        );
+
+                    this.reset();
+
+                } catch (error) {
+                    console.error(error);
+                    mensaje.textContent = "Error: " + error.message;
+
+                } finally {
+                    boton.disabled = false;
+                    boton.textContent = "Solicitar alquiler ↗";
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>

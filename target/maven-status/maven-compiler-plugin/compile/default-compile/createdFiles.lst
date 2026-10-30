@@ -1,0 +1,14 @@
+car_renting\vehiculo\infrastructure\adapter\VehiculoRepositoryAdapter.class
+car_renting\CarRentingApplication.class
+car_renting\vehiculo\infrastructure\web\VehiculoController.class
+car_renting\reserva\infrastructure\ReservaRepository.class
+car_renting\reserva\infrastructure\web\ReservaController.class
+car_renting\vehiculo\domain\port\VehiculoRepositoryPort.class
+car_renting\reserva\domain\port\ReservaRepositoryPort.class
+car_renting\reserva\infrastructure\web\ReservaController$SolicitudReserva.class
+car_renting\reserva\application\ReservaService.class
+car_renting\vehiculo\application\VehiculoService.class
+car_renting\reserva\infrastructure\adapter\ReservaRepositoryAdapter.class
+car_renting\vehiculo\domain\Vehiculo.class
+car_renting\reserva\domain\Reserva.class
+car_renting\vehiculo\infrastructure\VehiculoRepository.class
